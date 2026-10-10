@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>disable</Nullable>
+    <AssemblyName>DevourMorePlayers</AssemblyName>
+    <RootNamespace>DevourMorePlayers</RootNamespace>
+    <Version>0.7.1</Version>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <!-- Dossier d'installation de DEVOUR (avec MelonLoader déjà lancé une fois) :
+         dotnet build -c Release -p:GamePath="C:\...\Devour"  ou variable d'environnement DEVOUR_PATH -->
+    <GamePath Condition="'$(GamePath)' == '' and '$(DEVOUR_PATH)' != ''">$(DEVOUR_PATH)</GamePath>
+    <GamePath Condition="'$(GamePath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Devour</GamePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="$(GamePath)\MelonLoader\net6\MelonLoader.dll" Private="false" />
+    <Reference Include="$(GamePath)\MelonLoader\net6\0Harmony.dll" Private="false" />
+    <Reference Include="$(GamePath)\MelonLoader\net6\Il2CppInterop.Common.dll" Private="false" />
+    <Reference Include="$(GamePath)\MelonLoader\net6\Il2CppInterop.Runtime.dll" Private="false" />
+    <Reference Include="$(GamePath)\MelonLoader\net6\Il2CppInterop.HarmonySupport.dll" Private="false" />
+    <Reference Include="$(GamePath)\MelonLoader\Il2CppAssemblies\*.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- Copie automatique dans Mods\ après compilation : -p:InstallMod=true -->
+  <Target Name="InstallMod" AfterTargets="Build" Condition="'$(InstallMod)' == 'true'">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GamePath)\Mods" />
+  </Target>
+
+</Project>

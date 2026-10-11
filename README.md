@@ -84,6 +84,17 @@ Les logs Unity de chaque instance sont écrits dans `%TEMP%\DevourMultiTest\unit
 - L'écran de statistiques de fin de partie n'affiche que 4 joueurs (`GameStatsToken` a 4 emplacements en dur).
 - Dans le lobby, les emplacements des personnages sont prévus pour 4 joueurs.
 
+## Crédits
+
+Merci aux testeurs :
+
+- Wylfore
+- bot cool
+- sinaro
+- sundae
+- Claude
+- pac pac city
+
 ## Licence
 
 À définir.
